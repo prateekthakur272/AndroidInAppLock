@@ -1,5 +1,8 @@
 package dev.prateekthakur.androidinapplock.ui.features.lockcontent
 
+import android.annotation.SuppressLint
+import android.app.KeyguardManager
+import android.content.Context
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
@@ -37,4 +40,10 @@ fun authenticateWithSystemLock(
         })
 
     biometricPrompt.authenticate(promptInfo)
+}
+
+@SuppressLint("ServiceCast")
+fun isDeviceSecure(context: Context): Boolean {
+    val keyguardManager = context.getSystemService(Context.KEYGUARD_SERVICE) as KeyguardManager
+    return keyguardManager.isDeviceSecure
 }
